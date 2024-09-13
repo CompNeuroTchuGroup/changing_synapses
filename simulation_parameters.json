@@ -1,0 +1,23 @@
+{
+    "dataset_parameters": {
+        "n_samples": 100
+    },
+    "network_parameters": {
+        "input_size": 64,
+        "hidden_size": 128,
+        "output_size": 1,
+        "bias": 1,
+        "sigma_w": 1
+    },
+    "training_parameters": {
+        "num_epochs": 200,
+        "learning_rate": 0.1
+    },
+    "simulation_parameters": {
+        "mu": 1,
+        "sigma": 0,
+        "theta": 0,
+        "dt": 0.001
+    },
+    "seed": 42
+}
