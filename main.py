@@ -57,7 +57,7 @@ def run_simulation(experiment_path):
     for epoch in range(num_epochs):
         start_time = time.time()
         for x, y in zip(X_train, y_train):
-            grads = grad(loss)(params, x, y)
+            grads = grad(loss_mlp)(params, x, y)
             params['W_i'] -= learning_rate * grads['W_i']
             params['W_h'] -= learning_rate * grads['W_h']
             params['W_o'] -= learning_rate * grads['W_o']
@@ -68,13 +68,13 @@ def run_simulation(experiment_path):
 
             train_weights_list.append(copy(params['W_h']))
 
-        acc_list.append(accuracy(params, X_train, y_train))
-        loss_list.append(loss(params, X_train, y_train))
+        acc_list.append(accuracy_mlp(params, X_train, y_train))
+        loss_list.append(loss_mlp(params, X_train, y_train))
 
         if epoch % 10 == 0:
             epoch_time = time.time() - start_time
-            train_loss = loss(params, X_train, y_train)
-            train_acc = accuracy(params, X_train, y_train)
+            train_loss = loss_mlp(params, X_train, y_train)
+            train_acc = accuracy_mlp(params, X_train, y_train)
             print("Epoch {} in {:0.2f} sec".format(epoch, epoch_time))
             print("Training set loss {}".format(train_loss))
             print("Training set accuracy {}".format(train_acc))
