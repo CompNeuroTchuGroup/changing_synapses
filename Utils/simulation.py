@@ -63,6 +63,7 @@ def time_evolution_GOU(key, matrix, mu, theta, sigma, tau, dt):
     for _ in range(n_steps):
         key, sim_key = random.split(key)
         matrix += perturb_GOU(sim_key, matrix, mu, theta, sigma, dt)
+        matrix = jnp.where(matrix < 0, 0, matrix)
 
     return matrix
 
@@ -136,12 +137,17 @@ def mu_LN_from_params(mu, sigma, theta, dt=0.01, tau= 1):
     Theoretical formula for the mean of the log-normal distribution of the GOU process
     '''
 
-    return jnp.log(mu * jnp.sqrt(1 - sigma**2/2*theta))
+    return jnp.log(mu * jnp.sqrt(1 - sigma**2/(2*theta)))
 
 def sigma_LN_from_params(mu, sigma, theta, dt=0.01, tau = 1):
     '''
     Theoretical formula for the standard deviation of the log-normal distribution of the GOU process
     '''
 
-    return jnp.sqrt(jnp.log(1/(1  - sigma**2/(2*theta))))
+    return jnp.sqrt(jnp.log(1/(1  - (sigma**2)/(2*theta))))
 
+def lognormal_distribution(x, mu, sigma):
+    """
+    Compute the log-normal distribution.
+    """
+    return 1/(x*sigma*jnp.sqrt(2*jnp.pi)) * jnp.exp(-0.5*((jnp.log(x)-mu)/sigma)**2)

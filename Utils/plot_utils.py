@@ -58,6 +58,8 @@ def plot_weight_dynamics(w_list, title="Weight Dynamics", weights_to_show=100, l
         If True, the logarithm of the weights will be plotted. Default is False.
     save_path : str, optional
         The file path to save the figure. If None, the figure will not be saved. Default is None.
+    show : bool, optional
+        If True, the plot will be displayed. Default is False.
 
     Returns
     -------
