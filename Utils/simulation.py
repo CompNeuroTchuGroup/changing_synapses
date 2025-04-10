@@ -151,3 +151,10 @@ def lognormal_distribution(x, mu, sigma):
     Compute the log-normal distribution.
     """
     return 1/(x*sigma*jnp.sqrt(2*jnp.pi)) * jnp.exp(-0.5*((jnp.log(x)-mu)/sigma)**2)
+
+def asymptotic_variance(mu, theta,sigma, dt=None, tau=None ):
+    '''
+    Return the asymptotic variance of the process
+    '''
+
+    return mu**2 * sigma**2 / (2*theta-sigma**2)
